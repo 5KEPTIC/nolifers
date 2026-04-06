@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # NoLifers
 
 NoLifers is a personal media repository portal where users can track what they consume online, rate it, review it, and get dashboard insights plus cross-media recommendations for books, shows, anime, movies, and albums.
@@ -54,3 +55,6 @@ Copy `.env.example` to `.env`, then use one of these flows:
 - [Architecture](./docs/architecture.md)
 - [Domain Model](./docs/domain-model.md)
 
+=======
+# nolifers
+>>>>>>> a41a43013ce97e60493f906ae14a258d730dfcf4
