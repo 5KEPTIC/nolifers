@@ -1,0 +1,57 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: nolifers-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-nolifers}
+      POSTGRES_USER: ${POSTGRES_USER:-nolifers}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infra/postgres/init:/docker-entrypoint-initdb.d
+
+  analytics-engine:
+    build:
+      context: ./services/analytics-engine
+    container_name: nolifers-analytics
+    depends_on:
+      - postgres
+    environment:
+      SERVER_PORT: 8081
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/${POSTGRES_DB:-nolifers}
+      SPRING_DATASOURCE_USERNAME: ${POSTGRES_USER:-nolifers}
+      SPRING_DATASOURCE_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+    ports:
+      - "${ANALYTICS_PORT:-8081}:8081"
+
+  api-gateway:
+    build:
+      context: ./services/api-gateway
+    container_name: nolifers-api
+    depends_on:
+      - analytics-engine
+      - postgres
+    environment:
+      NODE_ENV: development
+      PORT: 4000
+      JWT_SECRET: ${JWT_SECRET:-replace-me}
+      ANALYTICS_BASE_URL: http://analytics-engine:8081
+    ports:
+      - "${API_GATEWAY_PORT:-4000}:4000"
+
+  web:
+    build:
+      context: ./apps/web
+    container_name: nolifers-web
+    depends_on:
+      - api-gateway
+    environment:
+      VITE_API_BASE_URL: ${VITE_API_BASE_URL:-http://localhost:4000}
+    ports:
+      - "${FRONTEND_PORT:-5173}:5173"
+
+volumes:
+  postgres_data:
+

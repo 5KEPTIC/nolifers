@@ -1,0 +1,10 @@
+server:
+  port: ${SERVER_PORT:8081}
+
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/nolifers}
+    username: ${SPRING_DATASOURCE_USERNAME:nolifers}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+  jackson:
+    default-property-inclusion: non_null
