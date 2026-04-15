@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>NoLifers — Project Presentation</title>
+  <style>
+    :root{
+      --bg:#071029; --card:#092038; --accent:#57b6ff; --muted:#9fb6cc; --text:#eaf6ff;
+      --w:1100px; --h:650px; --pad:40px; font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+    }
+    html,body{height:100%;margin:0;background:linear-gradient(180deg,#02101b 0%, #071029 100%);color:var(--text)}
+    .deck{width:var(--w);height:var(--h);margin:24px auto;position:relative;overflow:hidden;border-radius:14px;box-shadow:0 24px 60px rgba(2,10,20,.6);}
+    .slides{position:relative;width:100%;height:100%;}
+    .slide{position:absolute;inset:0;padding:var(--pad);box-sizing:border-box;display:none;background:linear-gradient(180deg, rgba(6,20,35,.6), rgba(4,12,22,.6));}
+    .slide.active{display:block}
+    h1,h2{margin:0 0 12px 0}
+    p{color:var(--muted);line-height:1.45}
+    .title{font-size:36px;color:var(--accent)}
+    .subtitle{font-size:20px;color:#cfefff;margin-bottom:18px}
+    .cols{display:flex;gap:28px}
+    .col{flex:1}
+    ul{color:var(--muted);margin:8px 0 0 18px}
+    .meta{position:absolute;right:18px;bottom:16px;font-size:13px;color:#8fb0c4}
+    .nav{position:absolute;left:50%;transform:translateX(-50%);bottom:12px;color:var(--muted);font-size:13px}
+    .controls{position:absolute;top:12px;right:16px;color:var(--muted);font-size:14px}
+    .badge{background:rgba(87,182,255,.08);border:1px solid rgba(87,182,255,.12);padding:6px 10px;border-radius:8px;color:var(--accent)}
+    .code{background:#021825;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,.03);font-family:monospace;color:#bfefff;font-size:13px;overflow-x:auto;}
+    .feature{background:linear-gradient(90deg, rgba(87,182,255,.06), transparent);padding:12px;border-radius:10px;border-left:4px solid var(--accent);margin:8px 0}
+    .grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px}
+    .score-box{background:rgba(87,182,255,.1);border:1px solid rgba(87,182,255,.2);padding:12px;border-radius:8px;margin:8px 0}
+    .points{color:var(--accent);font-weight:bold;font-size:18px}
+    /* responsive */
+    @media(max-width:1200px){:root{--w:940px;--h:620px}}
+    @media(max-width:900px){.deck{width:92%;height:560px}}
+  </style>
+</head>
+<body>
+  <div class="deck" role="application" aria-label="NoLifers presentation">
+    <div class="controls"><span class="badge">NoLifers — Full Stack Implementation</span></div>
+    <div class="slides">
+
+      <!-- ============================================================ -->
+      <!-- SECTION 1: INTRODUCTION (2 SLIDES) -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 1: Problem Statement -->
+      <section class="slide active" data-index="1">
+        <h1 class="title">Introduction — Problem Statement</h1>
+        <h2 class="subtitle">Why unified personal media management?</h2>
+        <div class="cols">
+          <div class="col">
+            <p>Users consume media across multiple platforms (books, movies, anime, games, music) but data remains fragmented. No unified view, tracking, or cross-media recommendations.</p>
+            <ul>
+              <li>Fragmented discovery</li>
+              <li>Lost personal context</li>
+              <li>Recommendation gaps</li>
+            </ul>
+          </div>
+          <div class="col">
+            <p><strong>Goal:</strong> Build a unified media portal with centralized library, ratings, and multi-modal recommendation engine.</p>
+            <div class="feature"><strong>Key Outcome:</strong> Accurate, explainable recommendations based on cross-media history.</div>
+          </div>
+        </div>
+        <div class="meta">Slide 1 of 17</div>
+      </section>
+
+      <!-- Slide 2: Project Scope & Evaluation -->
+      <section class="slide" data-index="2">
+        <h1 class="title">Project Scope & Evaluation Framework</h1>
+        <h2 class="subtitle">10 categories, 100 points total</h2>
+        <div class="cols">
+          <div class="col">
+            <ul>
+              <li><span class="points">15 pts</span> HTML Structure & Semantics</li>
+              <li><span class="points">15 pts</span> CSS Styling & Layout Logic</li>
+              <li><span class="points">15 pts</span> JavaScript Logic & Data Handling</li>
+              <li><span class="points">10 pts</span> DOM Manipulation & Event Stability</li>
+              <li><span class="points">10 pts</span> Hierarchical Scope Handling</li>
+            </ul>
+          </div>
+          <div class="col">
+            <ul>
+              <li><span class="points">10 pts</span> Table Design (Rowspan/Colspan)</li>
+              <li><span class="points">5 pts</span> Custom Services via DI</li>
+              <li><span class="points">5 pts</span> Node.js Module Usage</li>
+              <li><span class="points">5 pts</span> Database Connectivity</li>
+              <li><span class="points">5 pts</span> Error & Exception Handling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">Slide 2 of 17</div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 2: FRONTEND FUNDAMENTALS (3 SLIDES) -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 3: HTML Structure & Semantics -->
+      <section class="slide" data-index="3">
+        <h1 class="title">HTML Structure & Semantics</h1>
+        <h2 class="subtitle">Perfect Score: 15 Points</h2>
+        <p>Build a fully accessible, semantic HTML foundation using proper tags and ARIA attributes.</p>
+        <div class="grid-2col">
+          <div>
+            <strong>✅ Must Have:</strong>
+            <ul style="margin-top:8px">
+              <li>Semantic tags: &lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;section&gt;, &lt;article&gt;, &lt;footer&gt;</li>
+              <li>Proper heading hierarchy</li>
+              <li>ARIA labels & descriptors</li>
+              <li>Valid HTML5 structure</li>
+            </ul>
+          </div>
+          <div>
+            <strong>❌ Avoid:</strong>
+            <ul style="margin-top:8px">
+              <li>Excessive &lt;div&gt; wrappers</li>
+              <li>Missing alt text</li>
+              <li>Improper nesting</li>
+              <li>Non-semantic markup</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">Slide 3 of 17</div>
+      </section>
+
+      <!-- Slide 4: CSS Styling & Layout -->
+      <section class="slide" data-index="4">
+        <h1 class="title">CSS Styling & Layout Logic</h1>
+        <h2 class="subtitle">Perfect Score: 15 Points</h2>
+        <p>Implement responsive, smooth styling with proper layout controls and design system.</p>
+        <div class="cols">
+          <div class="col">
+            <strong>Responsive Design:</strong>
+            <ul style="margin-top:8px">
+              <li>Mobile-first approach</li>
+              <li>Breakpoints: 320px, 768px, 1024px, 1440px</li>
+              <li>Smooth transitions</li>
+              <li>CSS variables for theming</li>
+            </ul>
+          </div>
+          <div class="col">
+            <strong>Layout Systems:</strong>
+            <ul style="margin-top:8px">
+              <li>CSS Grid for complex layouts</li>
+              <li>Flexbox for components</li>
+              <li>Consistent spacing/padding</li>
+              <li>Accessible focus states</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">Slide 4 of 17</div>
+      </section>
+
+      <!-- Slide 5: JavaScript Logic & Data Handling -->
+      <section class="slide" data-index="5">
+        <h1 class="title">JavaScript Logic & Data Handling</h1>
+        <h2 class="subtitle">Perfect Score: 15 Points</h2>
+        <p>Robust JavaScript with modern ES6+ patterns and comprehensive error handling.</p>
+        <div class="feature"><strong>ES6+ Standards:</strong> const/let, arrow functions, async/await, proper scoping</div>
+        <div class="feature"><strong>Error Handling:</strong> Try-catch blocks, input validation, meaningful error messages</div>
+        <div class="feature"><strong>DOM Operations:</strong> Efficient queries, event delegation, memory management, no flickers</div>
+        <div class="feature"><strong>Data Flow:</strong> Proper state management, immutable updates, unidirectional flow</div>
+        <div class="meta">Slide 5 of 17</div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 3: DATABASE (5 DEDICATED SLIDES) -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 6: Database Architecture & Design -->
+      <section class="slide" data-index="6">
+        <h1 class="title">Database Architecture — Schema Design</h1>
+        <h2 class="subtitle">Perfect Score: 5 Points</h2>
+        <p>PostgreSQL relational schema with proper normalization, constraints, and relationships.</p>
+        <div class="feature"><strong>Core Tables:</strong> users, content_items, library_entries, ratings, recommendations, preferences</div>
+        <div class="feature"><strong>Normalization:</strong> 3NF design, minimal redundancy, single source of truth</div>
+        <div class="feature"><strong>Constraints:</strong> UUID primary keys, unique indexes, foreign key relationships with ON DELETE CASCADE</div>
+        <div class="feature"><strong>Data Types:</strong> Proper use of ENUM for controlled vocabularies, JSONB for flexible metadata</div>
+        <div class="meta">Slide 6 of 17</div>
+      </section>
+
+      <!-- Slide 7: Database Features & Capabilities -->
+      <section class="slide" data-index="7">
+        <h1 class="title">Database — Why PostgreSQL?</h1>
+        <h2 class="subtitle">Advanced Features & Performance</h2>
+        <ul>
+          <li><strong>Advanced Data Types:</strong> ENUM, JSONB, ARRAY, UUID</li>
+          <li><strong>Full-Text Search:</strong> Built-in FTS for content discovery</li>
+          <li><strong>Window Functions:</strong> For analytics and rankings</li>
+          <li><strong>ACID Transactions:</strong> Data consistency guarantees</li>
+          <li><strong>Indexing:</strong> B-tree, Hash, GiST indexes for query optimization</li>
+          <li><strong>JSONB Operators:</strong> Flexible semi-structured data queries</li>
+        </ul>
+        <div class="meta">Slide 7 of 17</div>
+      </section>
+
+      <!-- Slide 8: Database CRUD Operations -->
+      <section class="slide" data-index="8">
+        <h1 class="title">Database — CRUD Operations</h1>
+        <h2 class="subtitle">Create, Read, Update, Delete Patterns</h2>
+        <div class="cols">
+          <div class="col">
+            <strong>CREATE:</strong>
+            <div class="code" style="margin:8px 0">INSERT INTO users (id, name, email) VALUES ($1, $2, $3)</div>
+            <strong>READ:</strong>
+            <div class="code" style="margin:8px 0">SELECT * FROM content_items WHERE id = $1</div>
+          </div>
+          <div class="col">
+            <strong>UPDATE:</strong>
+            <div class="code" style="margin:8px 0">UPDATE library_entry SET status = $1 WHERE id = $2</div>
+            <strong>DELETE:</strong>
+            <div class="code" style="margin:8px 0">DELETE FROM ratings WHERE id = $1</div>
+          </div>
+        </div>
+        <div class="feature"><strong>Critical:</strong> Use parameterized queries to prevent SQL injection. All queries must be ordered and validated.</div>
+        <div class="meta">Slide 8 of 17</div>
+      </section>
+
+      <!-- Slide 9: Database Query Examples -->
+      <section class="slide" data-index="9">
+        <h1 class="title">Database — Advanced Queries & Analytics</h1>
+        <h2 class="subtitle">Real-world Query Patterns</h2>
+        <p><strong>Monthly Completion Trends:</strong></p>
+        <div class="code">SELECT date_trunc('month', completed_on) AS month, COUNT(*) as count
+FROM library_entry WHERE status='completed' GROUP BY month ORDER BY month DESC</div>
+        <p style="margin-top:12px"><strong>Average Rating per Content Type:</strong></p>
+        <div class="code">SELECT content_type, AVG(rating) as avg_rating, COUNT(*) as total
+FROM ratings JOIN content_items ON ratings.content_id = content_items.id
+GROUP BY content_type</div>
+        <div class="meta">Slide 9 of 17</div>
+      </section>
+
+      <!-- Slide 10: Database Connectivity & Error Handling -->
+      <section class="slide" data-index="10">
+        <h1 class="title">Database — Connectivity & Error Handling</h1>
+        <h2 class="subtitle">Connection Management & Resilience</h2>
+        <div class="feature"><strong>Connection Pool:</strong> Maintain pool of database connections for efficiency</div>
+        <div class="feature"><strong>Error Handling:</strong> Catch connection errors, query timeouts, constraint violations</div>
+        <div class="feature"><strong>Logging:</strong> Log all failed queries with full context for debugging</div>
+        <div class="feature"><strong>Transactions:</strong> Use BEGIN/COMMIT for atomic multi-statement operations</div>
+        <div class="feature"><strong>Retry Logic:</strong> Implement exponential backoff for transient failures</div>
+        <div class="meta">Slide 10 of 17</div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 4: FRONTEND ADVANCED (2 SLIDES) -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 11: DOM Manipulation & Event Stability -->
+      <section class="slide" data-index="11">
+        <h1 class="title">DOM Manipulation & Event Stability</h1>
+        <h2 class="subtitle">Perfect Score: 10 Points</h2>
+        <p>Smooth, flicker-free DOM updates with proper event handling and memory management.</p>
+        <div class="feature"><strong>Event Delegation:</strong> Use event bubbling for dynamic elements</div>
+        <div class="feature"><strong>Batch Updates:</strong> Use DocumentFragment for multiple DOM insertions</div>
+        <div class="feature"><strong>Animation Performance:</strong> Use requestAnimationFrame instead of setTimeout</div>
+        <div class="feature"><strong>Memory Management:</strong> Remove event listeners when elements are destroyed</div>
+        <div class="feature"><strong>Debouncing/Throttling:</strong> Prevent excessive event handler calls</div>
+        <div class="meta">Slide 11 of 17</div>
+      </section>
+
+      <!-- Slide 12: Hierarchical Scope & Table Design -->
+      <section class="slide" data-index="12">
+        <h1 class="title">Hierarchical Scope & Table Design</h1>
+        <h2 class="subtitle">Perfect Score: 10 + 10 Points</h2>
+        <div class="cols">
+          <div class="col">
+            <strong>Scope Handling (10 pts):</strong>
+            <ul style="margin-top:8px">
+              <li>Parent → Child data via props</li>
+              <li>Child → Parent events</li>
+              <li>Proper component hierarchy</li>
+              <li>No scope pollution</li>
+            </ul>
+          </div>
+          <div class="col">
+            <strong>Table Design (10 pts):</strong>
+            <ul style="margin-top:8px">
+              <li>Semantic &lt;thead&gt;, &lt;tbody&gt;, &lt;tfoot&gt;</li>
+              <li>Proper rowspan/colspan usage</li>
+              <li>Scope attributes on headers</li>
+              <li>Accessible, responsive design</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">Slide 12 of 17</div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 5: BACKEND SERVICES & MODULES (2 SLIDES) -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 13: Custom Services & Dependency Injection -->
+      <section class="slide" data-index="13">
+        <h1 class="title">Backend — Services & Dependency Injection</h1>
+        <h2 class="subtitle">Perfect Score: 5 + 5 Points</h2>
+        <p>Modular, reusable services with proper dependency injection patterns.</p>
+        <div class="cols">
+          <div class="col">
+            <strong>Services (5 pts):</strong>
+            <ul style="margin-top:8px">
+              <li>UserService - user operations</li>
+              <li>ApiService - HTTP client</li>
+              <li>AuthService - authentication</li>
+              <li>ValidationService - input validation</li>
+            </ul>
+          </div>
+          <div class="col">
+            <strong>Modules (5 pts):</strong>
+            <ul style="margin-top:8px">
+              <li>controllers/ - route handlers</li>
+              <li>services/ - business logic</li>
+              <li>models/ - data models</li>
+              <li>utils/ - helper functions</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">Slide 13 of 17</div>
+      </section>
+
+      <!-- Slide 14: Error & Exception Handling -->
+      <section class="slide" data-index="14">
+        <h1 class="title">Backend — Error & Exception Handling</h1>
+        <h2 class="subtitle">Perfect Score: 5 Points</h2>
+        <p>Comprehensive error handling with proper logging and meaningful responses.</p>
+        <div class="feature"><strong>Custom Errors:</strong> ValidationError (400), AuthError (401), NotFoundError (404), ServerError (500)</div>
+        <div class="feature"><strong>Error Middleware:</strong> Global handler catches all unhandled exceptions</div>
+        <div class="feature"><strong>Try-Catch:</strong> Wrap all async route handlers and database operations</div>
+        <div class="feature"><strong>Error Response Format:</strong> Consistent JSON structure with message, code, and status</div>
+        <div class="feature"><strong>Logging:</strong> Log all errors with full context and stack traces</div>
+        <div class="meta">Slide 14 of 17</div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- SECTION 6: JAVA SPRING BOOT (2 SLIDES) -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 15: Java Spring Boot - Architecture -->
+      <section class="slide" data-index="15">
+        <h1 class="title">Java Spring Boot — Analytics Engine</h1>
+        <h2 class="subtitle">Recommendation Service Architecture</h2>
+        <p>Spring Boot application responsible for intelligent recommendation generation.</p>
+        <div class="cols">
+          <div class="col">
+            <strong>Layers:</strong>
+            <ul style="margin-top:8px">
+              <li>Controller: REST endpoints</li>
+              <li>Service: business logic</li>
+              <li>Strategy: pluggable algorithms</li>
+              <li>Repository: DB access</li>
+            </ul>
+          </div>
+          <div class="col">
+            <strong>Key Features:</strong>
+            <ul style="margin-top:8px">
+              <li>Auto-configuration</li>
+              <li>Embedded servlet</li>
+              <li>JDBC/JPA integration</li>
+              <li>Exception handling</li>
+            </ul>
+          </div>
+        </div>
+        <div class="meta">Slide 15 of 17</div>
+      </section>
+
+      <!-- Slide 16: Spring Boot - Implementation -->
+      <section class="slide" data-index="16">
+        <h1 class="title">Spring Boot — Implementation Highlights</h1>
+        <h2 class="subtitle">RecommendationService Flow</h2>
+        <p><strong>Process:</strong> Normalize inputs → Build preference models → Execute strategies → Aggregate results → Return response with metadata</p>
+        <div class="code">@Service
+public class RecommendationService {
+  public RecommendationResponse run(RecommendationRequest req) {
+    // validate input, build preferences
+    // execute strategies, aggregate, return
+  }
+}</div>
+        <div class="feature"><strong>Benefits:</strong> Modular, testable, extensible architecture for multi-modal recommendations</div>
+        <div class="meta">Slide 16 of 17</div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- CONCLUSION -->
+      <!-- ============================================================ -->
+
+      <!-- Slide 17: Thank You & Next Steps -->
+      <section class="slide" data-index="17">
+        <h1 class="title">Thank You — Next Steps</h1>
+        <h2 class="subtitle">Implementation & Deployment Roadmap</h2>
+        <ul>
+          <li>Complete all 10 evaluation categories (100 points) following implementation guides</li>
+          <li>Test frontend responsiveness on mobile, tablet, and desktop</li>
+          <li>Validate database CRUD operations and query performance</li>
+          <li>Deploy to staging with proper error logging and monitoring</li>
+          <li>Conduct accessibility and security audits</li>
+        </ul>
+        <p style="margin-top:16px"><strong>Contact:</strong> Review the complete implementation guides: IMPLEMENTATION_GUIDE.md, CHECKLIST.md, and README_IMPLEMENTATION.md for detailed requirements and code examples.</p>
+        <div class="meta">Slide 17 of 17</div>
+      </section>
+
+    </div>
+
+    <div class="nav">Use ◀ ▶ (or left/right keys) to navigate • Press P to print to PDF</div>
+  </div>
+
+  <script>
+    (function(){
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      let idx = slides.findIndex(s=>s.classList.contains('active'));
+      if(idx<0) idx = 0;
+
+      const setActive = i=>{
+        slides.forEach(s=>s.classList.remove('active'));
+        slides[i].classList.add('active');
+        document.title = slides[i].querySelector('.title')?.textContent + ' — NoLifers';
+      }
+
+      setActive(idx);
+
+      function go(n){
+        idx = (idx + n + slides.length) % slides.length;
+        setActive(idx);
+      }
+
+      document.addEventListener('keydown', e=>{
+        if(e.key==='ArrowRight') go(1);
+        if(e.key==='ArrowLeft') go(-1);
+        if(e.key==='p' || e.key==='P') window.print();
+      });
+
+      // click navigation
+      document.querySelector('.deck').addEventListener('click', (ev)=>{
+        if(ev.clientX > window.innerWidth/2) go(1);
+        else go(-1);
+      });
+
+      // expose for console
+      window.next = ()=>go(1);
+      window.prev = ()=>go(-1);
+    })();
+  </script>
+</body>
+</html>
